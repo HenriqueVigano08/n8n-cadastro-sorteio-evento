@@ -19,34 +19,6 @@ Um único workflow com quatro entradas independentes:
 | `GET /webhook/evento-qr` | Exibe uma página com o QR Code que leva ao cadastro |
 | `/form/sorteio-admin` | Painel da organização para realizar os sorteios |
 
-### Cadastro
-
-```mermaid
-flowchart LR
-    A[Participante] -->|QR Code| B[Página de cadastro<br/>PT / EN]
-    B -->|POST| C[Validação<br/>no servidor]
-    C -->|válido| D[Normalização<br/>dos campos]
-    D --> E[(Google Sheets<br/>aba Dados)]
-    E -->|sucesso| F[200 ok]
-    E -->|falha| G[500 save_failed]
-    C -->|inválido| H[400 invalid_fields]
-```
-
-### Sorteio
-
-```mermaid
-flowchart LR
-    A[Painel admin] --> B[(Lê vencedores<br/>anteriores)]
-    B --> C[(Lê participantes)]
-    C --> D[Filtra elegíveis<br/>e remove duplicados]
-    D -->|há elegíveis| E[Embaralha e<br/>escolhe 1]
-    D -->|nenhum| F[Aviso: sem<br/>participantes]
-    E --> G[(Grava vencedor)]
-    G --> H[Relê e confirma<br/>a gravação]
-    H -->|confirmado| I[Mostra vencedor]
-    H -->|não confirmado| J[Pede conferência<br/>manual]
-```
-
 ## Destaques técnicos
 
 - **Página bilíngue gerada pelo próprio n8n** (nó Code), com troca de idioma sem recarregar, campos condicionais ("Outro") e seleção múltipla.
