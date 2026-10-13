@@ -1,0 +1,1296 @@
+{
+  "name": "Cadastro e Sorteio de Evento",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "cadastro-evento-enviar",
+        "responseMode": "responseNode",
+        "options": {
+          "allowedOrigins": "*"
+        }
+      },
+      "id": "21ad81dc-44a0-414b-8c72-c5d5865b5da4",
+      "name": "Formulário Evento",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        -592,
+        496
+      ],
+      "webhookId": "be1f0b30-f53e-4496-a319-8d4369b7b26e"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "20740fe5-60be-466e-b9d9-07c66280b01f",
+              "name": "Nome",
+              "value": "={{ $json[\"Nome\"] }}",
+              "type": "string"
+            },
+            {
+              "id": "929dfb2f-94c5-4631-959e-a7c3ebabb7d3",
+              "name": "E-mail",
+              "value": "={{ $json[\"E-mail\"] }}",
+              "type": "string"
+            },
+            {
+              "id": "e275fa81-6d5d-41cc-9c26-7f314151cb7b",
+              "name": "Telefone",
+              "value": "={{ $json[\"Telefone\"] }}",
+              "type": "string"
+            },
+            {
+              "id": "1b8a3a8d-107b-4541-ad89-a71c0643fa93",
+              "name": "Cargo",
+              "value": "={{ $json[\"Cargo\"] }}",
+              "type": "string"
+            },
+            {
+              "id": "ffdb6e2b-29dc-48b5-86be-9a32d429adb1",
+              "name": "Empresa",
+              "value": "={{ $json[\"Empresa\"] }}",
+              "type": "string"
+            },
+            {
+              "id": "c969d71c-f6b9-47e2-b2a8-a3fa8d4ef9c6",
+              "name": "Consentimento Evento",
+              "value": "={{ $json.consentimento }}",
+              "type": "boolean"
+            },
+            {
+              "id": "0aab5cae-9d9b-44ba-9bac-82c20175e2e3",
+              "name": "Data do Consentimento",
+              "value": "={{ $now.toUTC().toISO() }}",
+              "type": "string"
+            },
+            {
+              "id": "a0636b39-7e04-4049-89f4-f357c8d0acdc",
+              "name": "Versão do Aviso",
+              "value": "1.3 — 24/09/2026",
+              "type": "string"
+            },
+            {
+              "id": "8fa7843b-c456-4008-8a6e-151eb6a1c380",
+              "name": "Texto do Aviso",
+              "value": "={{ $json.idioma === \"en\" ? \"<h3>Privacy and use of your data</h3>\\n<p><strong>Empresa Exemplo, registered under CNPJ no. 00.000.000/0001-00</strong>, is responsible for processing the personal data provided in this form.</p>\\n<p>Your name, email address and phone number will be used to register your participation in the event, organize prize draws, identify winners and contact them as needed to arrange delivery of prizes.</p>\\n<p>In addition, based on the information you provide in this form, the Empresa Exemplo sales team may contact you to better understand your project and present solutions that may meet your needs. This contact may take place by email, phone or other channels you provide, and its sole purpose will be to discuss the subject you indicated in the form.</p>\\n<p>Processing for these purposes depends on your consent. Data will be accessed only by the team responsible for the event and the Empresa Exemplo sales team, to the extent necessary for the operation. It will be retained for the period necessary to hold the event, complete prize delivery and follow up on your sales inquiry, subject to any applicable legal retention obligations.</p>\" : \"<h3>Privacidade e uso dos seus dados</h3>\\n<p>A <strong>Empresa Exemplo, inscrita no CNPJ sob o nº 00.000.000/0001-00</strong>, é responsável pelo tratamento dos dados pessoais informados neste formulário.</p>\\n<p>Seu nome, e-mail e telefone serão utilizados para registrar sua participação no evento, organizar os sorteios, identificar os participantes premiados e realizar os contatos necessários à entrega dos prêmios.</p>\\n<p>Além disso, com base nas informações que você fornecer neste formulário, o time comercial da Empresa Exemplo poderá entrar em contato para entender melhor o seu projeto e apresentar soluções que possam atender à sua necessidade. Esse contato poderá ser feito por e-mail, telefone ou outros canais informados por você, e terá como objetivo exclusivo tratar do assunto que você indicou no formulário.</p>\\n<p>O tratamento para essas finalidades depende do seu consentimento. Os dados serão acessados apenas pela equipe responsável pelo evento, pelo time comercial da Empresa Exemplo, nos limites necessários à operação. Eles serão mantidos pelo período necessário à realização do evento, à conclusão da premiação e ao acompanhamento comercial da sua solicitação, observadas eventuais obrigações legais de conservação.</p>\" }}",
+              "type": "string"
+            },
+            {
+              "id": "c6eea6d5-c59c-403e-9616-6bec31aff231",
+              "name": "Texto do Aceite",
+              "value": "={{ $json.idioma === \"en\" ? \"I have read the privacy notice and authorize the use of my data to participate in prize draws, receive contact about prizes and be contacted by the Empresa Exemplo sales team about the project and interests provided in this form.\" : \"Li o aviso de privacidade e autorizo o uso dos meus dados para participar dos sorteios, receber contato sobre a premiação e ser contatado pelo time comercial da Empresa Exemplo sobre o projeto e os interesses informados neste formulário.\" }}",
+              "type": "string"
+            },
+            {
+              "id": "e37d69a8-10ba-4af4-b323-3e1cf648c265",
+              "name": "Origem",
+              "value": "Formulário Empresa Exemplo — Evento",
+              "type": "string"
+            },
+            {
+              "id": "41e4f5c7-cf92-4295-b86d-6d07cf731221",
+              "name": "ID Cadastro",
+              "value": "={{ $execution.id }}",
+              "type": "string"
+            },
+            {
+              "id": "9849e4c7-af0a-4f55-a63c-1940f58dda63",
+              "name": "Status Cadastro",
+              "value": "ATIVO",
+              "type": "string"
+            },
+            {
+              "id": "cdd4fb5f-86a3-4e8b-9914-645f4d5368d6",
+              "name": "Situacao projeto",
+              "value": "={{ $json[\"situacao_projeto\"] }}",
+              "type": "string"
+            },
+            {
+              "id": "0d3a0791-5449-47b7-8e51-f3ad6095067c",
+              "name": "Previsao aquisicao",
+              "value": "={{ $json[\"previsao_aquisicao\"] }}",
+              "type": "string"
+            },
+            {
+              "id": "e7ca7755-8b45-43a8-b9c5-fe6c4480328c",
+              "name": "Tecnologias projeto",
+              "value": "={{ ($json.tecnologias_projeto ?? []).map(opcao => opcao === 'Outro' && $json.tecnologias_projeto_outro ? 'Outro: ' + $json.tecnologias_projeto_outro : opcao).join('; ') }}",
+              "type": "string"
+            },
+            {
+              "id": "6439a35c-382a-44cb-bd0f-961540567c69",
+              "name": "Fonte recurso",
+              "value": "={{ $json.fonte_recurso === 'Outro' && $json.fonte_recurso_outro ? 'Outro: ' + $json.fonte_recurso_outro : ($json.fonte_recurso ?? '') }}",
+              "type": "string"
+            },
+            {
+              "id": "d2bbd578-02fb-4d2a-951b-9a60ba4a2dc3",
+              "name": "Apoio tecnico",
+              "value": "={{ $json[\"apoio_tecnico\"] }}",
+              "type": "string"
+            },
+            {
+              "id": "e9df8ed3-0a3d-4a80-97b1-92399bb8ac68",
+              "name": "idioma",
+              "type": "string",
+              "value": "={{ $json.idioma }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "23732a0c-fec1-486d-993c-834c651432e2",
+      "name": "Edit Fields",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        208,
+        480
+      ]
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "{\"ok\": true}",
+        "options": {
+          "responseCode": 200,
+          "responseHeaders": {
+            "entries": [
+              {
+                "name": "Access-Control-Allow-Origin",
+                "value": "*"
+              },
+              {
+                "name": "Cache-Control",
+                "value": "no-store"
+              }
+            ]
+          }
+        }
+      },
+      "id": "48543a00-ac3a-40bf-b9c3-795b698d0695",
+      "name": "Cadastro Confirmado",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.4,
+      "position": [
+        704,
+        384
+      ]
+    },
+    {
+      "parameters": {
+        "formTitle": "Painel de sorteios",
+        "formDescription": "Acesso exclusivo da organização. Cada sorteio seleciona uma pessoa que ainda não foi premiada neste evento.",
+        "formFields": {
+          "values": [
+            {
+              "fieldLabel": "Confirmação",
+              "fieldType": "dropdown",
+              "fieldOptions": {
+                "values": [
+                  {
+                    "option": "REALIZAR UM NOVO SORTEIO"
+                  }
+                ]
+              },
+              "requiredField": true
+            }
+          ]
+        },
+        "options": {
+          "appendAttribution": false,
+          "buttonLabel": "Sortear um participante",
+          "path": "sorteio-admin",
+          "customCss": ":root {\n --font-family:'Segoe UI',Arial,sans-serif; --font-size-header:26px; --font-size-paragraph:14px; --font-size-label:14px; --font-size-input:16px; --font-size-error:12px;\n --color-background:#edf5f1; --color-card-bg:#ffffff; --color-card-border:#dce9e2; --color-card-shadow:#123c3410;\n --color-header:#133d32; --color-header-subtext:#587168; --color-label:#244c3f; --color-link:#008a59;\n --color-input-bg:#fbfdfb; --color-input-text:#173c34; --color-input-border:#cdded4; --color-focus-border:#008a59;\n --color-submit-btn-bg:#00d78b; --color-submit-btn-text:#003c28; --color-error:#b42336; --color-required:#008a59;\n --border-radius-card:20px; --border-radius-input:9px; --padding-card:30px; --padding-form-input:13px;\n --container-width:650px; --submit-btn-height:51px; --box-shadow-card:0 10px 30px #123c3410;\n}\n* { box-sizing:border-box; }\nbody { margin:0; min-height:100vh; padding:24px 16px; background:#edf5f1; color:#173c34; }\n.container { width:100%; max-width:650px; margin:0 auto; padding:0; }\n.card { background:#fff; border:1px solid #dce9e2; border-radius:20px; padding:30px 34px; box-shadow:0 10px 30px #123c3410; overflow:hidden; }\n#n8n-form::before, #submitted-form::before { content:''; display:block; width:calc(100% + 68px); aspect-ratio:2048 / 683; margin:-30px -34px 28px; border-radius:19px 19px 0 0; background:#002824 url('https://example.com/imagens/banner.png') center / 100% 100% no-repeat; }\n.form-header { display:block; text-align:center; margin-bottom:26px; }\n.form-header h1 { color:#133d32; font-size:26px; font-weight:650; letter-spacing:-.6px; line-height:1.2; margin:0 0 10px; }\n.form-header p { display:block; color:#587168; font-size:14px; line-height:1.6; margin:0; padding:0; }\n.inputs-wrapper { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:8px 18px; padding:0 0 8px; }\n.inputs-wrapper > .form-group:first-child, .inputs-wrapper > .form-group:nth-child(n+6), .inputs-wrapper > .form-group.html, .inputs-wrapper > div:has(input[type=checkbox]) { grid-column:1 / -1; }\n.form-group { min-width:0; margin-bottom:0; }\nform label { display:block; color:#244c3f; font-weight:600; font-size:14px; line-height:1.5; }\nform .form-input { width:100%; min-height:48px; padding:12px 13px; border:1px solid #cdded4; border-radius:9px; background:#fbfdfb; color:#173c34; font-size:16px; }\nform .form-input::placeholder { color:#788b81; }\nform .form-input:focus { border-color:#008a59; outline:2px solid #008a59; outline-offset:2px; box-shadow:none; }\n.form-group.html { margin-top:14px; padding:18px 20px; background:#f0f8f3; border-radius:12px; color:#355f4c; font-size:13px; line-height:1.6; }\n.form-group.html h3 { font-size:14px; font-weight:600; color:#355f4c; margin:0 0 10px; }\n.form-group.html p { margin:10px 0 0; }\n.multiselect { border:0 !important; padding:0 !important; background:transparent !important; }\n.multiselect-option { padding:8px 0 !important; background:transparent !important; color:#405f51; }\n.multiselect-option label, .multiselect-option span { font-weight:400; font-size:13px; line-height:1.6; }\ninput[type=checkbox] { accent-color:#008b59; min-width:19px; min-height:19px; }\n.error-hidden { min-height:18px; font-size:12px; }\n#submit-btn { display:block; width:100%; min-height:51px; border:0; border-radius:10px; background:#00d78b; color:#003c28; font-size:15px; font-weight:650; margin-top:6px; }\n#submit-btn:hover { background:#00c980; }\n#submit-btn:focus-visible { outline:3px solid #008a59; outline-offset:3px; }\n#submit-btn:disabled { opacity:.6; }\n#n8n-form::after { content:'Participação no evento · Empresa Exemplo'; display:block; text-align:center; font-size:12px; color:#627c6e; margin-top:13px; }\n#submitted-form { text-align:center; }\n#submitted-header { color:#008a59; }\n#submitted-content { color:#244c3f; line-height:1.6; overflow-wrap:anywhere; }\na { color:#008a59; overflow-wrap:anywhere; }\n@media(max-width:480px) { body { padding:14px 9px; } .card { padding:24px 18px; } #n8n-form::before, #submitted-form::before { width:calc(100% + 36px); margin:-24px -18px 24px; } .inputs-wrapper { grid-template-columns:1fr; gap:4px; } .form-header h1 { font-size:23px; } }\n\n/* Aviso recolhível: controle visual separado do consentimento. */\n.inputs-wrapper > div:has(input[value=\"Privacidade e uso dos seus dados\"]) { grid-column:1/-1; background:#f0f8f3; border-radius:12px; padding:18px 20px; margin-top:14px; }\n.inputs-wrapper > div:has(input[value=\"Privacidade e uso dos seus dados\"]) > label,\n.inputs-wrapper > div:has(input[value=\"Privacidade e uso dos seus dados\"]) > .error-hidden { display:none; }\ninput[value=\"Privacidade e uso dos seus dados\"] { position:absolute; opacity:0; width:1px; height:1px; min-width:0; min-height:0; }\ninput[value=\"Privacidade e uso dos seus dados\"] + label { display:block; width:100%; cursor:pointer; color:#355f4c; font-weight:600; }\ninput[value=\"Privacidade e uso dos seus dados\"] + label::before { content:'▶'; margin-right:8px; }\ninput[value=\"Privacidade e uso dos seus dados\"]:checked + label::before { content:'▼'; }\ninput[value=\"Privacidade e uso dos seus dados\"]:focus-visible + label { outline:2px solid #008a59; outline-offset:4px; }\n.inputs-wrapper > div:has(input[value=\"Privacidade e uso dos seus dados\"]) + .form-group.html { display:none; }\n.inputs-wrapper > div:has(input[value=\"Privacidade e uso dos seus dados\"]:checked) + .form-group.html { display:block; margin-top:0; }\n/* Três logos: Parceiro 1 | Empresa | Parceiro 2 */\n#n8n-form::before,\n#submitted-form::before {\n  content: \"\";\n  display: block;\n  width: 100%;\n  height: 120px;\n  aspect-ratio: auto;\n  margin: 0 0 28px;\n  border-radius: 0;\n  border-bottom: 3px solid #00d78b;\n\n  background-color: #ffffff;\n  background-image:\n    url(\"https://example.com/imagens/logo-parceiro-1.png\"),\n    url(\"https://example.com/imagens/logo-empresa.png\"),\n    url(\"https://example.com/imagens/logo-parceiro-2.png\");\n\n  background-repeat: no-repeat;\n  background-position:\n    left center,\n    center center,\n    right center;\n\n  background-size:\n    29% auto,\n    34% auto,\n    23% auto;\n}\n\n/* Ajuste para celular */\n@media (max-width: 480px) {\n  #n8n-form::before,\n  #submitted-form::before {\n    height: 95px;\n    width: 100%;\n    margin: 0 0 24px;\n  }\n}"
+        }
+      },
+      "id": "8c4c68cb-8d28-4cec-881e-9c47ae169251",
+      "name": "Painel Administrativo do Sorteio",
+      "type": "n8n-nodes-base.formTrigger",
+      "typeVersion": 2.3,
+      "position": [
+        -656,
+        992
+      ],
+      "webhookId": "970e592c-9080-41fa-98fe-b59a32dc1138"
+    },
+    {
+      "parameters": {
+        "documentId": {
+          "__rl": true,
+          "value": "ID_DA_PLANILHA",
+          "mode": "list",
+          "cachedResultName": "Cadastro de Clientes",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/ID_DA_PLANILHA/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 677879416,
+          "mode": "list",
+          "cachedResultName": "Resultados",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/ID_DA_PLANILHA/edit#gid=677879416"
+        },
+        "options": {}
+      },
+      "id": "7c6835ef-d5e6-4cdf-a2b6-d34e2a575738",
+      "name": "Ler Vencedores Anteriores",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        -464,
+        992
+      ],
+      "retryOnFail": true,
+      "maxTries": 5,
+      "waitBetweenTries": 10000,
+      "alwaysOutputData": true
+    },
+    {
+      "parameters": {
+        "documentId": {
+          "__rl": true,
+          "value": "ID_DA_PLANILHA",
+          "mode": "list",
+          "cachedResultName": "Cadastro de Clientes",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/ID_DA_PLANILHA/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Dados",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/ID_DA_PLANILHA/edit#gid=0"
+        },
+        "options": {}
+      },
+      "id": "429bfccc-e229-40d9-9dc3-9a62f7c498a0",
+      "name": "Ler Participantes",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        -272,
+        992
+      ],
+      "retryOnFail": true,
+      "maxTries": 5,
+      "waitBetweenTries": 10000,
+      "alwaysOutputData": true,
+      "executeOnce": true
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "721617fe-b0e4-4666-a289-c7e9bca7149f",
+              "name": "elegiveis",
+              "value": "={{ (() => {\n  const email = v => String(v ?? '').trim().toLowerCase();\n\n  const telefone = v => {\n    const n = String(v ?? '').replace(/\\D/g, '');\n    return (n.length === 12 || n.length === 13) &&\n      n.startsWith('55') ? n.slice(2) : n;\n  };\n\n  const vencedores = $('Ler Vencedores Anteriores')\n    .all()\n    .map(item => item.json)\n    .filter(p =>\n      String(p.Status ?? '').trim().toUpperCase() === 'VENCEDOR'\n    );\n\n  const emailsPremiados = new Set(\n    vencedores.map(p => email(p['E-mail'])).filter(Boolean)\n  );\n\n  const telefonesPremiados = new Set(\n    vencedores.map(p => telefone(p.Telefone)).filter(Boolean)\n  );\n\n  const emailsIncluidos = new Set();\n  const telefonesIncluidos = new Set();\n  const elegiveis = [];\n\n  for (const item of $('Ler Participantes').all()) {\n    const p = item.json;\n    const nome = String(p.Nome ?? '').trim();\n    const e = email(p['E-mail']);\n    const t = telefone(p.Telefone);\n\n    if (\n      nome.length < 2 ||\n      !/^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/.test(e) ||\n      !/^\\d{10,11}$/.test(t)\n    ) continue;\n\n    if (\n      emailsPremiados.has(e) ||\n      telefonesPremiados.has(t) ||\n      emailsIncluidos.has(e) ||\n      telefonesIncluidos.has(t)\n    ) continue;\n\n    emailsIncluidos.add(e);\n    telefonesIncluidos.add(t);\n\n    elegiveis.push({\n      Nome: nome,\n      'E-mail': e,\n      Telefone: t,\n      Cargo: String(p.Cargo ?? '').trim(),\n      Empresa: String(p.Empresa ?? '').trim()\n    });\n  }\n\n  return elegiveis;\n})() }}",
+              "type": "array"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "9df2f2ba-cbf3-4186-a59c-b30daa459f74",
+      "name": "Preparar Participantes Elegíveis",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -80,
+        992
+      ],
+      "executeOnce": true
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "13ae120e-3710-4817-aeda-db5629c2e50c",
+              "leftValue": "={{ $json.elegiveis.length }}",
+              "rightValue": 0,
+              "operator": {
+                "type": "number",
+                "operation": "gt"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "9ea3f112-a5be-4f43-b2f2-9b7f936bfd6d",
+      "name": "Há Participantes?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        112,
+        992
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "completion",
+        "completionTitle": "Não há participantes disponíveis",
+        "completionMessage": "Não há cadastros válidos disponíveis ou todos já foram premiados. Nenhum novo sorteio foi registrado.",
+        "options": {
+          "formTitle": "Empresa Exemplo",
+          "customCss": ":root {\n --font-family:'Segoe UI',Arial,sans-serif; --font-size-header:26px; --font-size-paragraph:14px; --font-size-label:14px; --font-size-input:16px; --font-size-error:12px;\n --color-background:#edf5f1; --color-card-bg:#ffffff; --color-card-border:#dce9e2; --color-card-shadow:#123c3410;\n --color-header:#133d32; --color-header-subtext:#587168; --color-label:#244c3f; --color-link:#008a59;\n --color-input-bg:#fbfdfb; --color-input-text:#173c34; --color-input-border:#cdded4; --color-focus-border:#008a59;\n --color-submit-btn-bg:#00d78b; --color-submit-btn-text:#003c28; --color-error:#b42336; --color-required:#008a59;\n --border-radius-card:20px; --border-radius-input:9px; --padding-card:30px; --padding-form-input:13px;\n --container-width:650px; --submit-btn-height:51px; --box-shadow-card:0 10px 30px #123c3410;\n}\n* { box-sizing:border-box; }\nbody { margin:0; min-height:100vh; padding:24px 16px; background:#edf5f1; color:#173c34; }\n.container { width:100%; max-width:650px; margin:0 auto; padding:0; }\n.card { background:#fff; border:1px solid #dce9e2; border-radius:20px; padding:30px 34px; box-shadow:0 10px 30px #123c3410; overflow:hidden; }\n#n8n-form::before, #submitted-form::before { content:''; display:block; width:calc(100% + 68px); aspect-ratio:2048 / 683; margin:-30px -34px 28px; border-radius:19px 19px 0 0; background:#002824 url('https://example.com/imagens/banner.png') center / 100% 100% no-repeat; }\n.form-header { display:block; text-align:center; margin-bottom:26px; }\n.form-header h1 { color:#133d32; font-size:26px; font-weight:650; letter-spacing:-.6px; line-height:1.2; margin:0 0 10px; }\n.form-header p { display:block; color:#587168; font-size:14px; line-height:1.6; margin:0; padding:0; }\n.inputs-wrapper { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:8px 18px; padding:0 0 8px; }\n.inputs-wrapper > .form-group:first-child, .inputs-wrapper > .form-group:nth-child(n+6), .inputs-wrapper > .form-group.html, .inputs-wrapper > div:has(input[type=checkbox]) { grid-column:1 / -1; }\n.form-group { min-width:0; margin-bottom:0; }\nform label { display:block; color:#244c3f; font-weight:600; font-size:14px; line-height:1.5; }\nform .form-input { width:100%; min-height:48px; padding:12px 13px; border:1px solid #cdded4; border-radius:9px; background:#fbfdfb; color:#173c34; font-size:16px; }\nform .form-input::placeholder { color:#788b81; }\nform .form-input:focus { border-color:#008a59; outline:2px solid #008a59; outline-offset:2px; box-shadow:none; }\n.form-group.html { margin-top:14px; padding:18px 20px; background:#f0f8f3; border-radius:12px; color:#355f4c; font-size:13px; line-height:1.6; }\n.form-group.html h3 { font-size:14px; font-weight:600; color:#355f4c; margin:0 0 10px; }\n.form-group.html p { margin:10px 0 0; }\n.multiselect { border:0 !important; padding:0 !important; background:transparent !important; }\n.multiselect-option { padding:8px 0 !important; background:transparent !important; color:#405f51; }\n.multiselect-option label, .multiselect-option span { font-weight:400; font-size:13px; line-height:1.6; }\ninput[type=checkbox] { accent-color:#008b59; min-width:19px; min-height:19px; }\n.error-hidden { min-height:18px; font-size:12px; }\n#submit-btn { display:block; width:100%; min-height:51px; border:0; border-radius:10px; background:#00d78b; color:#003c28; font-size:15px; font-weight:650; margin-top:6px; }\n#submit-btn:hover { background:#00c980; }\n#submit-btn:focus-visible { outline:3px solid #008a59; outline-offset:3px; }\n#submit-btn:disabled { opacity:.6; }\n#n8n-form::after { content:'Participação no evento · Empresa Exemplo'; display:block; text-align:center; font-size:12px; color:#627c6e; margin-top:13px; }\n#submitted-form { text-align:center; }\n#submitted-header { color:#008a59; }\n#submitted-content { color:#244c3f; line-height:1.6; overflow-wrap:anywhere; }\na { color:#008a59; overflow-wrap:anywhere; }\n@media(max-width:480px) { body { padding:14px 9px; } .card { padding:24px 18px; } #n8n-form::before, #submitted-form::before { width:calc(100% + 36px); margin:-24px -18px 24px; } .inputs-wrapper { grid-template-columns:1fr; gap:4px; } .form-header h1 { font-size:23px; } }\n\n/* Aviso recolhível: controle visual separado do consentimento. */\n.inputs-wrapper > div:has(input[value=\"Privacidade e uso dos seus dados\"]) { grid-column:1/-1; background:#f0f8f3; border-radius:12px; padding:18px 20px; margin-top:14px; }\n.inputs-wrapper > div:has(input[value=\"Privacidade e uso dos seus dados\"]) > label,\n.inputs-wrapper > div:has(input[value=\"Privacidade e uso dos seus dados\"]) > .error-hidden { display:none; }\ninput[value=\"Privacidade e uso dos seus dados\"] { position:absolute; opacity:0; width:1px; height:1px; min-width:0; min-height:0; }\ninput[value=\"Privacidade e uso dos seus dados\"] + label { display:block; width:100%; cursor:pointer; color:#355f4c; font-weight:600; }\ninput[value=\"Privacidade e uso dos seus dados\"] + label::before { content:'▶'; margin-right:8px; }\ninput[value=\"Privacidade e uso dos seus dados\"]:checked + label::before { content:'▼'; }\ninput[value=\"Privacidade e uso dos seus dados\"]:focus-visible + label { outline:2px solid #008a59; outline-offset:4px; }\n.inputs-wrapper > div:has(input[value=\"Privacidade e uso dos seus dados\"]) + .form-group.html { display:none; }\n.inputs-wrapper > div:has(input[value=\"Privacidade e uso dos seus dados\"]:checked) + .form-group.html { display:block; margin-top:0; }\n"
+        }
+      },
+      "id": "8f663360-e268-4d71-a47f-e2fd5fa516f9",
+      "name": "Sem Participantes Disponíveis",
+      "type": "n8n-nodes-base.form",
+      "typeVersion": 2.5,
+      "position": [
+        336,
+        1104
+      ],
+      "webhookId": "c0f25293-bdc5-4da6-bc2d-93fb34488a8c"
+    },
+    {
+      "parameters": {
+        "path": "evento-qr",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "id": "522aa19c-f096-4bca-90c9-95306dba7b03",
+      "name": "Página QR Code",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [
+        -416,
+        1424
+      ],
+      "webhookId": "3b6d299c-ec9d-4e26-ba91-bee50e9c3dd1"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "7263c351-9624-401a-a4f0-bbb1738d2c2a",
+              "name": "urlCadastro",
+              "value": "={{ String($json.webhookUrl ?? '').replace(/[?#].*$/, '').replace(/\\/webhook(?:-test)?\\/evento-qr\\/?$/, '/webhook/cadastro-evento') }}",
+              "type": "string"
+            },
+            {
+              "id": "02ec8dee-5de0-4d97-8ccb-417560f38712",
+              "name": "teste",
+              "value": "={{ String($json.webhookUrl ?? '').includes('/webhook-test/') || !/\\/webhook\\/evento-qr\\/?$/.test(String($json.webhookUrl ?? '').replace(/[?#].*$/, '')) }}",
+              "type": "boolean"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "b461b588-b2e9-43ea-a0f6-2f44bfa277b3",
+      "name": "Definir Link Público",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -192,
+        1424
+      ]
+    },
+    {
+      "parameters": {
+        "respondWith": "text",
+        "responseBody": "={{ `\n<!DOCTYPE html>\n<html lang=\"pt-BR\">\n<head>\n  <meta charset=\"UTF-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Cadastro Evento — QR Code</title>\n  <style>\n    * { box-sizing: border-box; }\n    body {\n      margin: 0;\n      padding: 32px 16px;\n      background: #edf5f1;\n      color: #073333;\n      font-family: Arial, sans-serif;\n      text-align: center;\n    }\n    main {\n      max-width: 660px;\n      margin: auto;\n      padding: 36px 24px;\n      background: white;\n      border-radius: 24px;\n      border-top: 6px solid #00ce7c;\n      box-shadow: 0 12px 36px #07333312;\n    }\n    .logos {\n      display: flex;\n      align-items: center;\n      justify-content: center;\n      gap: 24px;\n      margin-bottom: 32px;\n    }\n    .logos img {\n      width: 25%;\n      height: 70px;\n      object-fit: contain;\n    }\n    .logos .empresa { width: 32%; }\n    h1 { font-size: 28px; }\n    p { line-height: 1.6; }\n    .qr {\n      display: block;\n      width: 320px;\n      max-width: 100%;\n      height: auto;\n      margin: 24px auto;\n    }\n  </style>\n</head>\n<body>\n  <main>\n    <div class=\"logos\">\n      <img src=\"https://example.com/imagens/logo-parceiro-1.png\"\n           alt=\"Parceiro 1\">\n      <img class=\"empresa\" src=\"https://example.com/imagens/logo-empresa.png\"\n           alt=\"Empresa Exemplo\">\n      <img src=\"https://example.com/imagens/logo-parceiro-2.png\"\n           alt=\"Parceiro 2\">\n    </div>\n\n    <h1>Cadastre-se e participe!</h1>\n    <p>Aponte a câmera do celular para o QR Code<br>\n       e preencha o formulário.</p>\n\n    <img\n      class=\"qr\"\n      src=\"https://api.qrserver.com/v1/create-qr-code/?size=600x600&amp;qzone=4&amp;data=${encodeURIComponent($json.urlCadastro)}\"\n      alt=\"QR Code para acessar o cadastro\"\n      width=\"320\"\n      height=\"320\"\n    >\n\n    <p>Participação no evento · Empresa Exemplo</p>\n  </main>\n</body>\n</html>\n` }}",
+        "options": {
+          "responseCode": 200,
+          "responseHeaders": {
+            "entries": [
+              {
+                "name": "Content-Type",
+                "value": "text/html; charset=utf-8"
+              },
+              {
+                "name": "Cache-Control",
+                "value": "no-store"
+              },
+              {
+                "name": "X-Robots-Tag",
+                "value": "noindex, nofollow"
+              }
+            ]
+          }
+        }
+      },
+      "id": "cb49cabe-908c-4e52-88ef-81655fdfb1a8",
+      "name": "Exibir QR Code Público",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.4,
+      "position": [
+        32,
+        1424
+      ]
+    },
+    {
+      "parameters": {
+        "fieldToSplitOut": "elegiveis",
+        "options": {
+          "destinationFieldName": "vencedor"
+        }
+      },
+      "type": "n8n-nodes-base.splitOut",
+      "typeVersion": 1,
+      "position": [
+        336,
+        896
+      ],
+      "id": "be69516c-074e-40a6-b389-37d22bc34933",
+      "name": "Separar Participantes"
+    },
+    {
+      "parameters": {
+        "type": "random"
+      },
+      "type": "n8n-nodes-base.sort",
+      "typeVersion": 1,
+      "position": [
+        512,
+        896
+      ],
+      "id": "aaedba97-71ac-4528-8c54-17afeadaf731",
+      "name": "Embaralhar Participantes"
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.limit",
+      "typeVersion": 1,
+      "position": [
+        704,
+        896
+      ],
+      "id": "5a221af5-fbec-40c2-b685-cb2caa18bedc",
+      "name": "Selecionar 1 Vencedor"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "1496f177-7366-4444-870d-c79e2ed5bd16",
+              "name": "Status",
+              "value": "VENCEDOR",
+              "type": "string"
+            },
+            {
+              "id": "0f4af202-1cd2-4114-bcf2-54b2b5596e0b",
+              "name": "Nome",
+              "value": "={{ $json.vencedor.Nome }}",
+              "type": "string"
+            },
+            {
+              "id": "c8a179af-69b4-477d-a3f0-0169b729edd6",
+              "name": "E-mail",
+              "value": "={{ $json.vencedor[\"E-mail\"] }}",
+              "type": "string"
+            },
+            {
+              "id": "0a8a42c9-5825-4a36-b1fb-db034e9a3d47",
+              "name": "Telefone",
+              "value": "={{ $json.vencedor.Telefone }}",
+              "type": "string"
+            },
+            {
+              "id": "14caaef9-6810-4354-83cd-c5e75f29f637",
+              "name": "Cargo",
+              "value": "={{ $json.vencedor.Cargo }}",
+              "type": "string"
+            },
+            {
+              "id": "e80d3e2b-cec6-48c5-86ce-f2fc6918a0d8",
+              "name": "Empresa",
+              "value": "={{ $json.vencedor.Empresa }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.5,
+      "position": [
+        912,
+        896
+      ],
+      "id": "854aa553-93b7-4913-b59d-84ec6c1d933c",
+      "name": "Preparar Resultado"
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "documentId": {
+          "__rl": true,
+          "value": "ID_DA_PLANILHA",
+          "mode": "list",
+          "cachedResultName": "Cadastro de Clientes",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/ID_DA_PLANILHA/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 677879416,
+          "mode": "list",
+          "cachedResultName": "Resultados",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/ID_DA_PLANILHA/edit#gid=677879416"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Status": "={{ $json.Status }}",
+            "Nome": "={{ $json.Nome }}",
+            "E-mail": "={{ $json[\"E-mail\"] }}",
+            "Telefone": "={{ $json.Telefone }}",
+            "Cargo": "={{ $json.Cargo }}",
+            "Empresa": "={{ $json.Empresa }}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "Status",
+              "displayName": "Status",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Nome",
+              "displayName": "Nome",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "E-mail",
+              "displayName": "E-mail",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Telefone",
+              "displayName": "Telefone",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Cargo",
+              "displayName": "Cargo",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Empresa",
+              "displayName": "Empresa",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        1104,
+        896
+      ],
+      "id": "4901d46c-9f27-4e14-ad23-39fd88154280",
+      "name": "Salvar Resultado no Google Sheets"
+    },
+    {
+      "parameters": {
+        "documentId": {
+          "__rl": true,
+          "value": "ID_DA_PLANILHA",
+          "mode": "list",
+          "cachedResultName": "Cadastro de Clientes",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/ID_DA_PLANILHA/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 677879416,
+          "mode": "list",
+          "cachedResultName": "Resultados",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/ID_DA_PLANILHA/edit#gid=677879416"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        1328,
+        896
+      ],
+      "id": "84b7e162-6561-43c1-a2f8-51cb4ea0f923",
+      "name": "Confirmar Gravação do Vencedor"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "b4d6d4f8-c1a7-4327-9c49-271c61c9e6b9",
+              "leftValue": "={{ (() => {   const escolhido = $('Preparar Resultado').first().json;    const email = v => String(v ?? '').trim().toLowerCase();    const telefone = v => {     const n = String(v ?? '').replace(/\\D/g, '');     return (n.length === 12 || n.length === 13) &&       n.startsWith('55') ? n.slice(2) : n;   };    return $('Confirmar Gravação do Vencedor').all().some(item => {     const p = item.json;      return String(p.Status ?? '').trim().toUpperCase() === 'VENCEDOR'       && email(p['E-mail']) === email(escolhido['E-mail'])       && telefone(p.Telefone) === telefone(escolhido.Telefone);   }); })() }}",
+              "rightValue": "",
+              "operator": {
+                "type": "boolean",
+                "operation": "true",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [
+        1552,
+        896
+      ],
+      "id": "6ddd025e-0f1a-4001-960a-8f8abfcd628f",
+      "name": "Vencedor Persistido?",
+      "executeOnce": true
+    },
+    {
+      "parameters": {
+        "operation": "completion",
+        "completionTitle": "Participante sorteado!",
+        "completionMessage": "={{ (() => {\n  const p = $('Preparar Resultado').first().json;\n\n  const escapar = v => String(v ?? '').replace(\n    /[&<>\"']/g,\n    c => ({\n      '&': '&amp;',\n      '<': '&lt;',\n      '>': '&gt;',\n      '\"': '&quot;',\n      \"'\": '&#39;'\n    }[c])\n  );\n\n  return '<strong>' + escapar(p.Nome) + '</strong>'\n    + '<br>Empresa: ' + escapar(p.Empresa || 'Não informada')\n    + '<br><br>Resultado registrado com sucesso.'\n    + '<br>Este participante foi excluído dos próximos sorteios.'\n    + '<br><br>Abra novamente o painel para realizar outro sorteio.';\n})() }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.form",
+      "typeVersion": 2.5,
+      "position": [
+        1776,
+        800
+      ],
+      "id": "768c2209-e35b-4804-99a8-08ab8cdade6f",
+      "name": "Mostrar Vencedor",
+      "webhookId": "9ff59571-bca7-49c7-8143-6ee3496c8072"
+    },
+    {
+      "parameters": {
+        "operation": "completion",
+        "completionTitle": "Confira o resultado antes de continuar",
+        "completionMessage": "Não foi possível confirmar o registro do vencedor. Confira esta execução e a aba Resultados antes de iniciar outro sorteio. Não repita a gravação sem verificar se o resultado já foi salvo.",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.form",
+      "typeVersion": 2.5,
+      "position": [
+        1776,
+        992
+      ],
+      "id": "1cca73a7-fcc4-4aeb-a51c-0e316431b1b8",
+      "name": "Conferência Necessária",
+      "webhookId": "38be5b58-4570-437c-81fb-f5371e16ec67"
+    },
+    {
+      "parameters": {
+        "path": "cadastro-evento",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "id": "7df075c0-a15e-4d59-914e-6473b0097b77",
+      "name": "Abrir Cadastro PT EN",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        -48,
+        0
+      ],
+      "webhookId": "081b63d8-c6ce-4341-a56c-1664faf9fefe"
+    },
+    {
+      "parameters": {
+        "jsCode": "const input=$input.first().json; const url=String(input.webhookUrl||'').replace(/[?#].*$/,'').replace(/\\/cadastro-evento\\/?$/, '/cadastro-evento-enviar'); if(!/^https?:\\/\\//.test(url))throw new Error('Webhook URL indisponível'); const template=\"<!doctype html><html lang=\\\"pt-BR\\\"><head><meta charset=\\\"utf-8\\\"><meta name=\\\"viewport\\\" content=\\\"width=device-width,initial-scale=1\\\"><title>Evento | Cadastro</title><style>\\n*{box-sizing:border-box}body{margin:0;padding:24px 12px;background:#edf5f1;color:#133d32;font:15px/1.5 'Segoe UI',Arial,sans-serif}.card{max-width:740px;margin:auto;background:white;border:1px solid #dce9e2;border-radius:20px;padding:24px 36px;box-shadow:0 10px 30px #123c3410}.langs{display:flex;justify-content:flex-end;gap:4px}.langs button{border:1px solid #dce9e2;background:white;color:#244c3f;border-radius:7px;padding:7px 13px;cursor:pointer}.langs button[aria-pressed=true]{background:#063c30;color:white}.logos{display:grid;grid-template-columns:1fr 1.15fr .8fr;gap:24px;align-items:center;padding:26px 0 30px;border-bottom:3px solid #00d78b}.logos img{width:100%;height:66px;object-fit:contain}.logos img:last-child{max-width:120px;justify-self:center}h1{text-align:center;font-size:28px;line-height:1.2;margin:28px 0 8px}.intro{text-align:center;color:#587168;margin:0 0 24px}.grid{display:grid;grid-template-columns:1fr 1fr;gap:20px}.field{min-width:0}.wide{grid-column:1/-1}label,.label{display:block;font-weight:600;margin-bottom:7px}input:not([type=checkbox]),select,summary.multi{width:100%;font:inherit;min-height:48px;border:1px solid #cdded4;border-radius:9px;padding:12px;background:#fbfdfb;color:#173c34}select{white-space:normal}input:focus,select:focus,button:focus-visible,summary:focus-visible{outline:2px solid #008a59;outline-offset:2px}input[type=checkbox]{accent-color:#008a59;width:19px;height:19px;flex-shrink:0}summary{cursor:pointer}.options{padding:12px;border:1px solid #dce9e2;border-top:0;border-radius:0 0 9px 9px;max-height:280px;overflow:auto}.options label,.accept{display:flex;align-items:flex-start;gap:10px;font-weight:400}.options label{padding:5px 0}.other{margin-top:14px}[hidden]{display:none!important}.privacy{background:#f0f8f3;border-radius:10px;padding:16px;margin-top:24px}.privacy summary{font-weight:600}.notice{font-size:13px;color:#355f4c}.accept{margin:20px 0;font-size:14px}.submit{width:100%;border:0;border-radius:10px;min-height:52px;background:#00d78b;color:#003c28;font:600 16px 'Segoe UI',sans-serif;cursor:pointer}.submit:disabled{opacity:.6;cursor:wait}.status{padding:16px;border-radius:10px;margin-top:16px;background:#f0f8f3}.status.error{color:#a52230;background:#fff0f1}.foot{text-align:center;font-size:12px;color:#627c6e;margin-top:18px}.required{font-size:12px;color:#587168;margin-bottom:20px}@media(max-width:480px){.card{padding:20px 18px}.logos{gap:12px;padding:20px 0}.logos img{height:45px}h1{font-size:24px}.grid{grid-template-columns:1fr}}\\n</style></head><body><main class=\\\"card\\\"><nav class=\\\"langs\\\" aria-label=\\\"Idioma / Language\\\"><button type=\\\"button\\\" data-lang=\\\"pt\\\" aria-pressed=\\\"true\\\">PT</button><button type=\\\"button\\\" data-lang=\\\"en\\\" aria-pressed=\\\"false\\\">EN</button></nav><div class=\\\"logos\\\"><img src=\\\"https://example.com/imagens/logo-parceiro-1.png\\\" alt=\\\"Parceiro 1\\\"><img src=\\\"https://example.com/imagens/logo-empresa.png\\\" alt=\\\"Empresa Exemplo\\\"><img src=\\\"https://example.com/imagens/logo-parceiro-2.png\\\" alt=\\\"Parceiro 2\\\"></div><h1 data-i18n=\\\"title\\\"></h1><p class=\\\"intro\\\" data-i18n=\\\"intro\\\"></p><form id=\\\"registration\\\"><p class=\\\"required\\\" data-i18n=\\\"required\\\"></p><div class=\\\"grid\\\" id=\\\"fields\\\"></div><details class=\\\"privacy\\\"><summary data-i18n=\\\"privacy\\\"></summary><div class=\\\"notice\\\" id=\\\"notice\\\"></div></details><label class=\\\"accept\\\"><input id=\\\"consent\\\" type=\\\"checkbox\\\" required><span data-i18n=\\\"consent\\\"></span></label><button class=\\\"submit\\\" id=\\\"submit\\\" type=\\\"submit\\\" data-i18n=\\\"submit\\\"></button></form><div id=\\\"status\\\" class=\\\"status\\\" role=\\\"status\\\" aria-live=\\\"polite\\\" hidden></div><p class=\\\"foot\\\" data-i18n=\\\"footer\\\"></p></main><script>\\nconst CONFIG=[{\\\"key\\\": \\\"Nome\\\", \\\"pt\\\": \\\"Nome completo\\\", \\\"en\\\": \\\"Full name\\\", \\\"required\\\": true, \\\"type\\\": \\\"text\\\"}, {\\\"key\\\": \\\"E-mail\\\", \\\"pt\\\": \\\"E-mail\\\", \\\"en\\\": \\\"Email\\\", \\\"required\\\": true, \\\"type\\\": \\\"email\\\"}, {\\\"key\\\": \\\"Telefone\\\", \\\"pt\\\": \\\"Telefone\\\", \\\"en\\\": \\\"Phone\\\", \\\"required\\\": true, \\\"type\\\": \\\"tel\\\"}, {\\\"key\\\": \\\"Cargo\\\", \\\"pt\\\": \\\"Cargo\\\", \\\"en\\\": \\\"Job title\\\", \\\"required\\\": true, \\\"type\\\": \\\"text\\\"}, {\\\"key\\\": \\\"Empresa\\\", \\\"pt\\\": \\\"Empresa\\\", \\\"en\\\": \\\"Company / Institution\\\", \\\"required\\\": true, \\\"type\\\": \\\"text\\\"}, {\\\"key\\\": \\\"situacao_projeto\\\", \\\"pt\\\": \\\"Atualmente, você possui algum projeto de pesquisa, inovação ou modernização tecnológica?\\\", \\\"en\\\": \\\"Do you currently have a research, innovation or technology modernization project?\\\", \\\"required\\\": true, \\\"type\\\": \\\"select\\\", \\\"options\\\": [{\\\"pt\\\": \\\"Sim, já está aprovado e possui verba disponível\\\", \\\"en\\\": \\\"Yes, approved and funding is available\\\"}, {\\\"pt\\\": \\\"Sim, está aprovado e aguardando liberação de verba\\\", \\\"en\\\": \\\"Yes, approved and awaiting release of funding\\\"}, {\\\"pt\\\": \\\"Sim, está em fase de elaboração/submissão\\\", \\\"en\\\": \\\"Yes, being developed / submitted\\\"}, {\\\"pt\\\": \\\"Sim, mas ainda está em fase inicial de planejamento\\\", \\\"en\\\": \\\"Yes, in the early planning stage\\\"}, {\\\"pt\\\": \\\"Não possuo projeto no momento\\\", \\\"en\\\": \\\"I do not have a project at the moment\\\"}]}, {\\\"key\\\": \\\"previsao_aquisicao\\\", \\\"pt\\\": \\\"Caso possua um projeto, qual é a previsão para aquisição ou implementação da solução?\\\", \\\"en\\\": \\\"If you have a project, when do you expect to purchase or implement the solution?\\\", \\\"required\\\": false, \\\"type\\\": \\\"select\\\", \\\"options\\\": [{\\\"pt\\\": \\\"Imediata / até 3 meses\\\", \\\"en\\\": \\\"Immediately / within 3 months\\\"}, {\\\"pt\\\": \\\"De 3 a 6 meses\\\", \\\"en\\\": \\\"3 to 6 months\\\"}, {\\\"pt\\\": \\\"De 6 a 12 meses\\\", \\\"en\\\": \\\"6 to 12 months\\\"}, {\\\"pt\\\": \\\"Acima de 12 meses\\\", \\\"en\\\": \\\"More than 12 months\\\"}, {\\\"pt\\\": \\\"Ainda não definido\\\", \\\"en\\\": \\\"Not yet defined\\\"}]}, {\\\"key\\\": \\\"tecnologias_projeto\\\", \\\"pt\\\": \\\"Quais tecnologias ou soluções estão relacionadas ao seu projeto?\\\", \\\"en\\\": \\\"Which technologies or solutions are related to your project?\\\", \\\"required\\\": false, \\\"type\\\": \\\"multi\\\", \\\"options\\\": [{\\\"pt\\\": \\\"Inteligência Artificial / Machine Learning\\\", \\\"en\\\": \\\"Artificial Intelligence / Machine Learning\\\"}, {\\\"pt\\\": \\\"HPC – High Performance Computing\\\", \\\"en\\\": \\\"HPC – High Performance Computing\\\"}, {\\\"pt\\\": \\\"Servidores\\\", \\\"en\\\": \\\"Servers\\\"}, {\\\"pt\\\": \\\"Servidores com GPU\\\", \\\"en\\\": \\\"GPU servers\\\"}, {\\\"pt\\\": \\\"Armazenamento / Storage\\\", \\\"en\\\": \\\"Storage\\\"}, {\\\"pt\\\": \\\"Backup e proteção de dados\\\", \\\"en\\\": \\\"Backup and data protection\\\"}, {\\\"pt\\\": \\\"Redes / Switches\\\", \\\"en\\\": \\\"Networks / Switches\\\"}, {\\\"pt\\\": \\\"Infraestrutura de Data Center\\\", \\\"en\\\": \\\"Data center infrastructure\\\"}, {\\\"pt\\\": \\\"Virtualização / HCI\\\", \\\"en\\\": \\\"Virtualization / HCI\\\"}, {\\\"pt\\\": \\\"Cloud / Nuvem\\\", \\\"en\\\": \\\"Cloud\\\"}, {\\\"pt\\\": \\\"Cybersecurity / Segurança\\\", \\\"en\\\": \\\"Cybersecurity\\\"}, {\\\"pt\\\": \\\"Notebooks\\\", \\\"en\\\": \\\"Laptops\\\"}, {\\\"pt\\\": \\\"Desktops / Workstations\\\", \\\"en\\\": \\\"Desktops / Workstations\\\"}, {\\\"pt\\\": \\\"Monitores e periféricos\\\", \\\"en\\\": \\\"Monitors and peripherals\\\"}, {\\\"pt\\\": \\\"Outro\\\", \\\"en\\\": \\\"Other\\\"}]}, {\\\"key\\\": \\\"fonte_recurso\\\", \\\"pt\\\": \\\"Caso aplicável, qual é a fonte de recurso ou órgão de fomento?\\\", \\\"en\\\": \\\"If applicable, what is the funding source or funding agency?\\\", \\\"required\\\": false, \\\"type\\\": \\\"select\\\", \\\"options\\\": [{\\\"pt\\\": \\\"FAPESP\\\", \\\"en\\\": \\\"FAPESP\\\"}, {\\\"pt\\\": \\\"FINEP\\\", \\\"en\\\": \\\"FINEP\\\"}, {\\\"pt\\\": \\\"CNPq\\\", \\\"en\\\": \\\"CNPq\\\"}, {\\\"pt\\\": \\\"CAPES\\\", \\\"en\\\": \\\"CAPES\\\"}, {\\\"pt\\\": \\\"Fundação de apoio\\\", \\\"en\\\": \\\"Support foundation\\\"}, {\\\"pt\\\": \\\"Recurso próprio da instituição\\\", \\\"en\\\": \\\"Institution’s own funds\\\"}, {\\\"pt\\\": \\\"Emenda / recurso público\\\", \\\"en\\\": \\\"Public funding / legislative allocation\\\"}, {\\\"pt\\\": \\\"Outro\\\", \\\"en\\\": \\\"Other\\\"}, {\\\"pt\\\": \\\"Prefiro não informar\\\", \\\"en\\\": \\\"Prefer not to say\\\"}]}, {\\\"key\\\": \\\"apoio_tecnico\\\", \\\"pt\\\": \\\"Gostaria de receber apoio técnico para avaliar, dimensionar ou estruturar a solução para o seu projeto?\\\", \\\"en\\\": \\\"Would you like technical support to evaluate, size or design the solution for your project?\\\", \\\"required\\\": true, \\\"type\\\": \\\"select\\\", \\\"options\\\": [{\\\"pt\\\": \\\"Sim\\\", \\\"en\\\": \\\"Yes\\\"}, {\\\"pt\\\": \\\"Talvez, gostaria de conversar melhor\\\", \\\"en\\\": \\\"Maybe, I would like to discuss it\\\"}, {\\\"pt\\\": \\\"Não neste momento\\\", \\\"en\\\": \\\"Not at this time\\\"}]}];const UI={\\\"pt\\\": {\\\"title\\\": \\\"Preencha seus dados!\\\", \\\"intro\\\": \\\"Cadastre-se para participar do evento.\\\", \\\"choose\\\": \\\"Selecione uma opção\\\", \\\"multi\\\": \\\"Selecione as tecnologias\\\", \\\"selected\\\": \\\"selecionada(s)\\\", \\\"techOther\\\": \\\"Qual outra tecnologia ou solução?\\\", \\\"fundOther\\\": \\\"Qual outra fonte de recurso ou órgão de fomento?\\\", \\\"privacy\\\": \\\"Privacidade e uso dos seus dados\\\", \\\"consent\\\": \\\"Li o aviso de privacidade e autorizo o uso dos meus dados para participar dos sorteios, receber contato sobre a premiação e ser contatado pelo time comercial da Empresa Exemplo sobre o projeto e os interesses informados neste formulário.\\\", \\\"submit\\\": \\\"Confirmar minha participação\\\", \\\"sending\\\": \\\"Enviando…\\\", \\\"success\\\": \\\"Tudo certo! Seu cadastro foi registrado.\\\", \\\"error\\\": \\\"Não foi possível confirmar o cadastro. Suas respostas foram mantidas. Se o envio demorar ou a conexão cair, consulte a equipe antes de reenviar.\\\", \\\"invalid\\\": \\\"Confira os campos obrigatórios e as opções selecionadas.\\\", \\\"footer\\\": \\\"Participação no evento · Empresa Exemplo\\\", \\\"required\\\": \\\"* Campos obrigatórios\\\", \\\"notice\\\": \\\"<h3>Privacidade e uso dos seus dados</h3>\\\\n<p>A <strong>Empresa Exemplo, inscrita no CNPJ sob o nº 00.000.000/0001-00</strong>, é responsável pelo tratamento dos dados pessoais informados neste formulário.</p>\\\\n<p>Seu nome, e-mail e telefone serão utilizados para registrar sua participação no evento, organizar os sorteios, identificar os participantes premiados e realizar os contatos necessários à entrega dos prêmios.</p>\\\\n<p>Além disso, com base nas informações que você fornecer neste formulário, o time comercial da Empresa Exemplo poderá entrar em contato para entender melhor o seu projeto e apresentar soluções que possam atender à sua necessidade. Esse contato poderá ser feito por e-mail, telefone ou outros canais informados por você, e terá como objetivo exclusivo tratar do assunto que você indicou no formulário.</p>\\\\n<p>O tratamento para essas finalidades depende do seu consentimento. Os dados serão acessados apenas pela equipe responsável pelo evento, pelo time comercial da Empresa Exemplo, nos limites necessários à operação. Eles serão mantidos pelo período necessário à realização do evento, à conclusão da premiação e ao acompanhamento comercial da sua solicitação, observadas eventuais obrigações legais de conservação.</p>\\\"}, \\\"en\\\": {\\\"title\\\": \\\"Enter your details!\\\", \\\"intro\\\": \\\"Register to take part in the event.\\\", \\\"choose\\\": \\\"Select an option\\\", \\\"multi\\\": \\\"Select technologies\\\", \\\"selected\\\": \\\"selected\\\", \\\"techOther\\\": \\\"Which other technology or solution?\\\", \\\"fundOther\\\": \\\"Which other funding source or agency?\\\", \\\"privacy\\\": \\\"Privacy and use of your data\\\", \\\"consent\\\": \\\"I have read the privacy notice and authorize the use of my data to participate in prize draws, receive contact about prizes and be contacted by the Empresa Exemplo sales team about the project and interests provided in this form.\\\", \\\"submit\\\": \\\"Confirm my participation\\\", \\\"sending\\\": \\\"Submitting…\\\", \\\"success\\\": \\\"All set! Your registration has been recorded.\\\", \\\"error\\\": \\\"We could not confirm your registration. Your answers have been kept. If the connection was lost or the request timed out, check with the team before submitting again.\\\", \\\"invalid\\\": \\\"Check required fields and selected options.\\\", \\\"footer\\\": \\\"Event registration · Empresa Exemplo\\\", \\\"required\\\": \\\"* Required fields\\\", \\\"notice\\\": \\\"<h3>Privacy and use of your data</h3>\\\\n<p><strong>Empresa Exemplo, registered under CNPJ no. 00.000.000/0001-00</strong>, is responsible for processing the personal data provided in this form.</p>\\\\n<p>Your name, email address and phone number will be used to register your participation in the event, organize prize draws, identify winners and contact them as needed to arrange delivery of prizes.</p>\\\\n<p>In addition, based on the information you provide in this form, the Empresa Exemplo sales team may contact you to better understand your project and present solutions that may meet your needs. This contact may take place by email, phone or other channels you provide, and its sole purpose will be to discuss the subject you indicated in the form.</p>\\\\n<p>Processing for these purposes depends on your consent. Data will be accessed only by the team responsible for the event and the Empresa Exemplo sales team, to the extent necessary for the operation. It will be retained for the period necessary to hold the event, complete prize delivery and follow up on your sales inquiry, subject to any applicable legal retention obligations.</p>\\\"}};const POST_URL=__POST_URL__;let lang='pt',sending=false,done=false,statusKey='';\\nconst form=document.getElementById('registration'),fields=document.getElementById('fields');\\nfor(const q of CONFIG){const box=document.createElement('div');box.className='field'+(q.key==='Nome'||q.options?' wide':'');const label=document.createElement(q.type==='multi'?'span':'label');label.className='label';label.dataset.question=q.key;if(q.type!=='multi')label.htmlFor=q.key;else label.id='tech-label';box.append(label);\\nif(q.type==='multi'){const d=document.createElement('details');d.id='technologies';const s=document.createElement('summary');s.className='multi';s.id='tech-summary';s.setAttribute('aria-labelledby','tech-label tech-summary');d.append(s);const opts=document.createElement('div');opts.className='options';q.options.forEach((o,i)=>{const l=document.createElement('label'),c=document.createElement('input'),t=document.createElement('span');c.type='checkbox';c.name=q.key;c.value=o.pt;t.dataset.option=q.key+':'+i;l.append(c,t);opts.append(l)});d.append(opts);box.append(d)}else{const el=document.createElement(q.type==='select'?'select':'input');el.id=q.key;el.name=q.key;el.required=q.required;if(q.type==='select'){el.append(new Option('', ''));q.options.forEach(o=>el.append(new Option(o.pt,o.pt)))}else{el.type=q.type;el.maxLength=300;el.autocomplete=({Nome:'name','E-mail':'email',Telefone:'tel',Cargo:'organization-title',Empresa:'organization'})[q.key]||'off'}box.append(el)}\\nif(q.key==='tecnologias_projeto'||q.key==='fonte_recurso'){const wrap=document.createElement('div');wrap.className='other';wrap.hidden=true;wrap.id=q.key+'-other';const l=document.createElement('label'),i=document.createElement('input');i.id=q.key+'_outro';i.name=i.id;i.maxLength=500;l.htmlFor=i.id;l.dataset.i18n=q.key==='fonte_recurso'?'fundOther':'techOther';wrap.append(l,i);box.append(wrap)}fields.append(box)}\\nfunction technologies(){return [...form.querySelectorAll('input[name=\\\"tecnologias_projeto\\\"]:checked')].map(e=>e.value)}\\nfunction updateOthers(){for(const k of ['tecnologias_projeto','fonte_recurso']){const yes=k==='tecnologias_projeto'?technologies().includes('Outro'):document.getElementById(k).value==='Outro';document.getElementById(k+'-other').hidden=!yes;document.getElementById(k+'_outro').required=yes;document.getElementById(k+'_outro').disabled=!yes}const count=technologies().length;document.getElementById('tech-summary').textContent=count?count+' '+UI[lang].selected:UI[lang].multi}\\nfunction translate(){document.documentElement.lang=lang==='pt'?'pt-BR':'en';document.querySelectorAll('[data-i18n]').forEach(e=>e.textContent=UI[lang][e.dataset.i18n]);document.querySelectorAll('[data-lang]').forEach(e=>e.setAttribute('aria-pressed',String(e.dataset.lang===lang)));for(const q of CONFIG){document.querySelector('[data-question=\\\"'+q.key+'\\\"]').textContent=q[lang]+(q.required?' *':'');if(q.type==='select'){const el=document.getElementById(q.key);el.options[0].textContent=UI[lang].choose;q.options.forEach((o,i)=>el.options[i+1].textContent=o[lang])}if(q.type==='multi')q.options.forEach((o,i)=>document.querySelector('[data-option=\\\"'+q.key+':'+i+'\\\"]').textContent=o[lang])}document.getElementById('notice').innerHTML=UI[lang].notice;updateOthers();if(statusKey)document.getElementById('status').textContent=UI[lang][statusKey];if(sending)document.getElementById('submit').textContent=UI[lang].sending}\\ndocument.querySelectorAll('[data-lang]').forEach(e=>e.addEventListener('click',()=>{lang=e.dataset.lang;translate()}));form.addEventListener('change',updateOthers);\\nform.addEventListener('submit',async e=>{e.preventDefault();if(sending||done)return;updateOthers();if(!form.reportValidity())return;const payload={};for(const q of CONFIG)payload[q.key]=q.type==='multi'?technologies():document.getElementById(q.key).value.trim();for(const k of ['tecnologias_projeto','fonte_recurso'])payload[k+'_outro']=document.getElementById(k+'-other').hidden?'':document.getElementById(k+'_outro').value.trim();payload.consentimento=document.getElementById('consent').checked;payload.idioma=lang;sending=true;document.getElementById('submit').disabled=true;document.getElementById('submit').textContent=UI[lang].sending;const status=document.getElementById('status');status.hidden=true;statusKey='';try{const res=await fetch(POST_URL,{method:'POST',headers:{'Content-Type':'text/plain;charset=UTF-8'},credentials:'omit',body:JSON.stringify(payload)});const data=await res.json();if(!res.ok||data.ok!==true){statusKey=res.status===400?'invalid':'error';throw Error('submission')}done=true;form.hidden=true;statusKey='success';status.className='status'}catch(err){if(statusKey!=='invalid')statusKey='error';status.className='status error'}finally{sending=false;document.getElementById('submit').disabled=false;document.getElementById('submit').textContent=UI[lang].submit;status.hidden=false;status.textContent=UI[lang][statusKey]}});translate();\\n</script></body></html>\"; const templateAjustado = template\n  // Nomes dos idiomas por extenso.\n  .replace('>PT</button>', '>Português</button>')\n  .replace('>EN</button>', '>English</button>')\n\n  // Atualiza o cabeçalho após o cadastro,\n  // inclusive ao trocar de idioma.\n  .replace(\n    'function translate(){',\n    `function translate(){\n      if (done) {\n        UI.pt.title = 'Cadastro Concluído';\n        UI.en.title = 'Registration Complete';\n        document.querySelector('.intro').hidden = true;\n      }\n    `\n  )\n\n  // Aplica a alteração somente após a confirmação do envio.\n  .replace(\n    'done=true;form.hidden=true;',\n    'done=true;form.hidden=true;translate();'\n  );\n\nreturn [{\n  json: {\n    html: templateAjustado.replace(\n      '__POST_URL__',\n      JSON.stringify(url).replace(/</g, '\\\\u003c')\n    )\n  }\n}];"
+      },
+      "id": "af1fbd89-5508-4361-82f6-e234b79bf746",
+      "name": "Montar Página PT EN",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        192,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "respondWith": "text",
+        "responseBody": "={{ $json.html }}",
+        "options": {
+          "responseHeaders": {
+            "entries": [
+              {
+                "name": "Content-Type",
+                "value": "text/html; charset=utf-8"
+              },
+              {
+                "name": "Cache-Control",
+                "value": "no-store"
+              }
+            ]
+          }
+        }
+      },
+      "id": "4944a70a-cc45-4044-a155-d95d0501517e",
+      "name": "Exibir Formulário PT EN",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.4,
+      "position": [
+        416,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "let b=$input.first().json.body;try{if(typeof b==='string')b=JSON.parse(b)}catch(e){b=null}const errors=[];const out={};const config=[{\"key\": \"Nome\", \"pt\": \"Nome completo\", \"en\": \"Full name\", \"required\": true, \"type\": \"text\"}, {\"key\": \"E-mail\", \"pt\": \"E-mail\", \"en\": \"Email\", \"required\": true, \"type\": \"email\"}, {\"key\": \"Telefone\", \"pt\": \"Telefone\", \"en\": \"Phone\", \"required\": true, \"type\": \"tel\"}, {\"key\": \"Cargo\", \"pt\": \"Cargo\", \"en\": \"Job title\", \"required\": true, \"type\": \"text\"}, {\"key\": \"Empresa\", \"pt\": \"Empresa\", \"en\": \"Company / Institution\", \"required\": true, \"type\": \"text\"}, {\"key\": \"situacao_projeto\", \"pt\": \"Atualmente, você possui algum projeto de pesquisa, inovação ou modernização tecnológica?\", \"en\": \"Do you currently have a research, innovation or technology modernization project?\", \"required\": true, \"type\": \"select\", \"options\": [{\"pt\": \"Sim, já está aprovado e possui verba disponível\", \"en\": \"Yes, approved and funding is available\"}, {\"pt\": \"Sim, está aprovado e aguardando liberação de verba\", \"en\": \"Yes, approved and awaiting release of funding\"}, {\"pt\": \"Sim, está em fase de elaboração/submissão\", \"en\": \"Yes, being developed / submitted\"}, {\"pt\": \"Sim, mas ainda está em fase inicial de planejamento\", \"en\": \"Yes, in the early planning stage\"}, {\"pt\": \"Não possuo projeto no momento\", \"en\": \"I do not have a project at the moment\"}]}, {\"key\": \"previsao_aquisicao\", \"pt\": \"Caso possua um projeto, qual é a previsão para aquisição ou implementação da solução?\", \"en\": \"If you have a project, when do you expect to purchase or implement the solution?\", \"required\": false, \"type\": \"select\", \"options\": [{\"pt\": \"Imediata / até 3 meses\", \"en\": \"Immediately / within 3 months\"}, {\"pt\": \"De 3 a 6 meses\", \"en\": \"3 to 6 months\"}, {\"pt\": \"De 6 a 12 meses\", \"en\": \"6 to 12 months\"}, {\"pt\": \"Acima de 12 meses\", \"en\": \"More than 12 months\"}, {\"pt\": \"Ainda não definido\", \"en\": \"Not yet defined\"}]}, {\"key\": \"tecnologias_projeto\", \"pt\": \"Quais tecnologias ou soluções estão relacionadas ao seu projeto?\", \"en\": \"Which technologies or solutions are related to your project?\", \"required\": false, \"type\": \"multi\", \"options\": [{\"pt\": \"Inteligência Artificial / Machine Learning\", \"en\": \"Artificial Intelligence / Machine Learning\"}, {\"pt\": \"HPC – High Performance Computing\", \"en\": \"HPC – High Performance Computing\"}, {\"pt\": \"Servidores\", \"en\": \"Servers\"}, {\"pt\": \"Servidores com GPU\", \"en\": \"GPU servers\"}, {\"pt\": \"Armazenamento / Storage\", \"en\": \"Storage\"}, {\"pt\": \"Backup e proteção de dados\", \"en\": \"Backup and data protection\"}, {\"pt\": \"Redes / Switches\", \"en\": \"Networks / Switches\"}, {\"pt\": \"Infraestrutura de Data Center\", \"en\": \"Data center infrastructure\"}, {\"pt\": \"Virtualização / HCI\", \"en\": \"Virtualization / HCI\"}, {\"pt\": \"Cloud / Nuvem\", \"en\": \"Cloud\"}, {\"pt\": \"Cybersecurity / Segurança\", \"en\": \"Cybersecurity\"}, {\"pt\": \"Notebooks\", \"en\": \"Laptops\"}, {\"pt\": \"Desktops / Workstations\", \"en\": \"Desktops / Workstations\"}, {\"pt\": \"Monitores e periféricos\", \"en\": \"Monitors and peripherals\"}, {\"pt\": \"Outro\", \"en\": \"Other\"}]}, {\"key\": \"fonte_recurso\", \"pt\": \"Caso aplicável, qual é a fonte de recurso ou órgão de fomento?\", \"en\": \"If applicable, what is the funding source or funding agency?\", \"required\": false, \"type\": \"select\", \"options\": [{\"pt\": \"FAPESP\", \"en\": \"FAPESP\"}, {\"pt\": \"FINEP\", \"en\": \"FINEP\"}, {\"pt\": \"CNPq\", \"en\": \"CNPq\"}, {\"pt\": \"CAPES\", \"en\": \"CAPES\"}, {\"pt\": \"Fundação de apoio\", \"en\": \"Support foundation\"}, {\"pt\": \"Recurso próprio da instituição\", \"en\": \"Institution’s own funds\"}, {\"pt\": \"Emenda / recurso público\", \"en\": \"Public funding / legislative allocation\"}, {\"pt\": \"Outro\", \"en\": \"Other\"}, {\"pt\": \"Prefiro não informar\", \"en\": \"Prefer not to say\"}]}, {\"key\": \"apoio_tecnico\", \"pt\": \"Gostaria de receber apoio técnico para avaliar, dimensionar ou estruturar a solução para o seu projeto?\", \"en\": \"Would you like technical support to evaluate, size or design the solution for your project?\", \"required\": true, \"type\": \"select\", \"options\": [{\"pt\": \"Sim\", \"en\": \"Yes\"}, {\"pt\": \"Talvez, gostaria de conversar melhor\", \"en\": \"Maybe, I would like to discuss it\"}, {\"pt\": \"Não neste momento\", \"en\": \"Not at this time\"}]}]; if(!b||typeof b!=='object'||Array.isArray(b))b={};\nfor(const q of config){let v=b[q.key];if(q.type==='multi'){if(v===undefined)v=[];if(!Array.isArray(v)||v.some(x=>typeof x!=='string'||!q.options.some(o=>o.pt===x)))errors.push(q.key);out[q.key]=Array.isArray(v)?[...new Set(v)]:[]}else{if(v===undefined)v='';if(typeof v!=='string'){errors.push(q.key);v=''}v=v.trim();if(v.length>300||(q.required&&!v)||(q.options&&v&&!q.options.some(o=>o.pt===v)))errors.push(q.key);out[q.key]=v}}\nif(!/^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/.test(out['E-mail']))errors.push('E-mail');if(b.consentimento!==true)errors.push('consentimento');if(!['pt','en'].includes(b.idioma))errors.push('idioma');for(const k of ['tecnologias_projeto','fonte_recurso']){const required=k==='tecnologias_projeto'?out[k].includes('Outro'):out[k]==='Outro';const v=typeof b[k+'_outro']==='string'?b[k+'_outro'].trim():'';if(required&&(!v||v.length>500))errors.push(k+'_outro');out[k+'_outro']=required?v:''}out.consentimento=b.consentimento===true;out.idioma=b.idioma;return [{json:{...out,valid:errors.length===0,errors}}];"
+      },
+      "id": "159b2029-66e2-4156-bc3b-eccad4433265",
+      "name": "Validar Cadastro",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -352,
+        496
+      ]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "2dae6cb2-2cd8-4f0c-827f-ed137e057af3",
+              "leftValue": "={{ $json.valid }}",
+              "rightValue": "",
+              "operator": {
+                "type": "boolean",
+                "operation": "true",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "def50df5-78d9-4e3b-9777-c6944ff33607",
+      "name": "Cadastro Válido?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        -160,
+        496
+      ]
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "{\"ok\": false, \"error\": \"invalid_fields\"}",
+        "options": {
+          "responseCode": 400,
+          "responseHeaders": {
+            "entries": [
+              {
+                "name": "Access-Control-Allow-Origin",
+                "value": "*"
+              },
+              {
+                "name": "Cache-Control",
+                "value": "no-store"
+              }
+            ]
+          }
+        }
+      },
+      "id": "181ca361-d64b-47c9-a75b-1968bbb39238",
+      "name": "Responder Dados Inválidos",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.4,
+      "position": [
+        16,
+        656
+      ]
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "{\"ok\": false, \"error\": \"save_failed\"}",
+        "options": {
+          "responseCode": 500,
+          "responseHeaders": {
+            "entries": [
+              {
+                "name": "Access-Control-Allow-Origin",
+                "value": "*"
+              },
+              {
+                "name": "Cache-Control",
+                "value": "no-store"
+              }
+            ]
+          }
+        }
+      },
+      "id": "45469e5f-d3e2-4612-bbac-461de85ccb8e",
+      "name": "Responder Erro de Gravação",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.4,
+      "position": [
+        720,
+        576
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "documentId": {
+          "__rl": true,
+          "value": "ID_DA_PLANILHA",
+          "mode": "list",
+          "cachedResultName": "Cadastro de Clientes",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/ID_DA_PLANILHA/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Dados",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/ID_DA_PLANILHA/edit#gid=0"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Nome": "={{ $json.Nome }}",
+            "E-mail": "={{ $json['E-mail'] }}",
+            "Telefone": "={{ $json.Telefone }}",
+            "Cargo": "={{ $json.Cargo }}",
+            "Empresa": "={{ $json.Empresa }}",
+            "Situacao projeto": "={{ $json['Situacao projeto'] }}",
+            "Previsao aquisicao": "={{ $json['Previsao aquisicao'] }}",
+            "Tecnologias projeto": "={{ $json['Tecnologias projeto'] }}",
+            "Fonte recurso": "={{ $json['Fonte recurso'] }}",
+            "Apoio tecnico": "={{ $json['Apoio tecnico'] }}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "Nome",
+              "displayName": "Nome",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "E-mail",
+              "displayName": "E-mail",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Telefone",
+              "displayName": "Telefone",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Cargo",
+              "displayName": "Cargo",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Empresa",
+              "displayName": "Empresa",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Situacao projeto",
+              "displayName": "Situacao projeto",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Previsao aquisicao",
+              "displayName": "Previsao aquisicao",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Tecnologias projeto",
+              "displayName": "Tecnologias projeto",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Fonte recurso",
+              "displayName": "Fonte recurso",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Apoio tecnico",
+              "displayName": "Apoio tecnico",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        432,
+        480
+      ],
+      "id": "67c9d5d2-fad9-477b-83de-2da6d06b6fe7",
+      "name": "Append row in sheet",
+      "onError": "continueErrorOutput"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Formulário Evento": {
+      "main": [
+        [
+          {
+            "node": "Validar Cadastro",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields": {
+      "main": [
+        [
+          {
+            "node": "Append row in sheet",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Painel Administrativo do Sorteio": {
+      "main": [
+        [
+          {
+            "node": "Ler Vencedores Anteriores",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Ler Vencedores Anteriores": {
+      "main": [
+        [
+          {
+            "node": "Ler Participantes",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Ler Participantes": {
+      "main": [
+        [
+          {
+            "node": "Preparar Participantes Elegíveis",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Preparar Participantes Elegíveis": {
+      "main": [
+        [
+          {
+            "node": "Há Participantes?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Há Participantes?": {
+      "main": [
+        [
+          {
+            "node": "Separar Participantes",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Sem Participantes Disponíveis",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Página QR Code": {
+      "main": [
+        [
+          {
+            "node": "Definir Link Público",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Definir Link Público": {
+      "main": [
+        [
+          {
+            "node": "Exibir QR Code Público",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Separar Participantes": {
+      "main": [
+        [
+          {
+            "node": "Embaralhar Participantes",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Embaralhar Participantes": {
+      "main": [
+        [
+          {
+            "node": "Selecionar 1 Vencedor",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Selecionar 1 Vencedor": {
+      "main": [
+        [
+          {
+            "node": "Preparar Resultado",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Preparar Resultado": {
+      "main": [
+        [
+          {
+            "node": "Salvar Resultado no Google Sheets",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Salvar Resultado no Google Sheets": {
+      "main": [
+        [
+          {
+            "node": "Confirmar Gravação do Vencedor",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Confirmar Gravação do Vencedor": {
+      "main": [
+        [
+          {
+            "node": "Vencedor Persistido?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Vencedor Persistido?": {
+      "main": [
+        [
+          {
+            "node": "Mostrar Vencedor",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Conferência Necessária",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Abrir Cadastro PT EN": {
+      "main": [
+        [
+          {
+            "node": "Montar Página PT EN",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Montar Página PT EN": {
+      "main": [
+        [
+          {
+            "node": "Exibir Formulário PT EN",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Validar Cadastro": {
+      "main": [
+        [
+          {
+            "node": "Cadastro Válido?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Cadastro Válido?": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Responder Dados Inválidos",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Append row in sheet": {
+      "main": [
+        [
+          {
+            "node": "Cadastro Confirmado",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Responder Erro de Gravação",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate"
+  },
+  "nodeGroups": [],
+  "tags": []
+}
